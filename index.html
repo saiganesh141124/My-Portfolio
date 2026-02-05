@@ -1,1 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sai Ganesh | Portfolio</title>
 
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    /* Theme Variables */
+    :root {
+      --bg: #f3f6fc;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --card-bg: rgba(255, 255, 255, 0.85);
+      --border: rgba(255, 255, 255, 1);
+      --primary: #0d9488; /* Teal 600 */
+      --secondary: #0f172a; /* Slate 900 */
+      --accent-gradient: linear-gradient(135deg, #0d9488, #2dd4bf);
+      --shadow: 0 10px 40px -10px rgba(0,0,0,0.1);
+    }
+
+    .dark {
+      --bg: #0b1121;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --card-bg: rgba(30, 41, 59, 0.6);
+      --border: rgba(255, 255, 255, 0.08);
+      --primary: #2dd4bf; 
+      --secondary: #f8fafc;
+      --accent-gradient: linear-gradient(135deg, #2dd4bf, #0ea5e9);
+      --shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Outfit', sans-serif;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      overflow: hidden; 
+      position: relative;
+    }
+
+    /* Background Animation */
+    .bg-shape {
+      position: fixed;
+      filter: blur(80px);
+      z-index: -1;
+      opacity: 0.4;
+      border-radius: 50%;
+      animation: float 10s infinite ease-in-out alternate;
+    }
+    .shape-1 {
+      top: -10%; left: -10%; width: 500px; height: 500px;
+      background: var(--primary);
+    }
+    .shape-2 {
+      bottom: -10%; right: -10%; width: 400px; height: 400px;
+      background: #3b82f6;
+      animation-delay: -5s;
+    }
+
+    @keyframes float {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(30px, 50px); }
+    }
+
+    /* Layout */
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      height: 90vh; /* Increased slightly to fit extra details */
+      display: grid;
+      grid-template-columns: 350px 1fr;
+      gap: 1.5rem;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 2rem;
+      overflow-y: auto;
+      position: relative;
+    }
+    .card::-webkit-scrollbar { width: 4px; }
+    .card::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 4px; }
+
+    /* Left Column: Profile */
+    .profile-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 2rem 1.5rem;
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      cursor: pointer;
+      color: var(--text);
+      opacity: 0.7;
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      padding: 4px;
+      background: var(--accent-gradient);
+      margin-bottom: 0.8rem;
+    }
+    .avatar div {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: var(--primary);
+      border: 4px solid var(--bg);
+    }
+    
+    .profile-card h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    
+    .status-badge {
+      display: inline-block;
+      margin-top: 0.5rem;
+      background: rgba(45, 212, 191, 0.15);
+      color: var(--primary);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: 1px solid rgba(45, 212, 191, 0.3);
+    }
+
+    /* Education List (Compact for Profile) */
+    .education-list {
+      margin-top: 1.5rem;
+      width: 100%;
+      text-align: left;
+    }
+
+    .edu-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      padding: 8px;
+      border-radius: 10px;
+      transition: background 0.2s;
+    }
+    .edu-item:hover { background: rgba(255,255,255,0.05); }
+
+    .edu-item i {
+      color: var(--primary);
+      font-size: 1.1rem;
+      width: 20px;
+      text-align: center;
+    }
+    
+    .edu-text strong { display: block; color: var(--text); font-weight: 600; }
+    
+    /* Social Buttons */
+    .social-links {
+      margin-top: auto;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .social-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      padding: 0.7rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .github-btn {
+      background: var(--secondary);
+      color: var(--bg);
+    }
+    .dark .github-btn { background: #fff; color: #000; }
+    
+    .email-link {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+      text-align: center;
+    }
+    .email-link:hover { color: var(--primary); text-decoration: underline; }
+
+    /* Right Column Grid */
+    .details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto 1fr;
+      gap: 1.5rem;
+    }
+
+    .span-2 { grid-column: span 2; }
+
+    h2 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--text);
+    }
+    h2 i { color: var(--primary); }
+
+    .about-text {
+      color: var(--text-muted);
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    /* Skills */
+    .skills-wrapper {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.8rem;
+    }
+    .skill-pill {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+      background: rgba(127, 127, 127, 0.08);
+      padding: 0.8rem 0.5rem;
+      border-radius: 16px;
+    }
+    .skill-pill i { font-size: 1.5rem; color: var(--text); }
+    .skill-pill span { font-size: 0.75rem; font-weight: 600; }
+
+    /* Achievements List */
+    .achieve-item {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .achieve-item:last-child { border: none; margin-bottom: 0; padding-bottom: 0; }
+    
+    .achieve-icon {
+      min-width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(45, 212, 191, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      font-size: 1.2rem;
+    }
+
+    .achieve-info b { display: block; color: var(--text); font-size: 0.95rem; margin-bottom: 2px;}
+    .achieve-info span { color: var(--text-muted); font-size: 0.85rem; }
+
+    .mini-footer {
+      grid-column: span 2;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    /* Mobile */
+    @media (max-width: 900px) {
+      body { overflow-y: auto; height: auto; display: block; padding: 1rem; }
+      .container { display: flex; flex-direction: column; height: auto; }
+      .bg-shape { display: none; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="bg-shape shape-1"></div>
+  <div class="bg-shape shape-2"></div>
+
+  <div class="container">
+    
+    <div class="card profile-card">
+      <div class="toggle theme-toggle" onclick="toggleTheme()">
+        <i data-lucide="moon"></i>
+      </div>
+
+      <div class="avatar">
+        <div><i class="fa-solid fa-user-astronaut"></i></div>
+      </div>
+
+      <h1>Sai Ganesh</h1>
+      <div class="status-badge">Second Year IT Student</div>
+      
+      <div class="education-list">
+        <div class="edu-item">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <div class="edu-text">
+              <strong>Vasavi College</strong>
+              <span>B.Tech - IT</span>
+            </div>
+        </div>
+        <div class="edu-item">
+            <i class="fa-solid fa-building-columns"></i>
+            <div class="edu-text">
+              <strong>Narayana Jr College</strong>
+              <span>Intermediate</span>
+            </div>
+        </div>
+        <div class="edu-item">
+            <i class="fa-solid fa-school"></i>
+            <div class="edu-text">
+              <strong>MGM Int. School</strong>
+              <span>Schooling</span>
+            </div>
+        </div>
+      </div>
+
+      <div class="social-links">
+        <a href="https://github.com/saiganesh141124?tab=overview" target="_blank" class="social-btn github-btn">
+          <i class="fa-brands fa-github"></i> Visit GitHub
+        </a>
+        <a href="mailto:saiganeshkokkula25@gmail.com" class="email-link">
+          <i class="fa-solid fa-envelope"></i> saiganeshkokkula25@gmail.com
+        </a>
+      </div>
+    </div>
+
+    <div class="details-grid">
+      
+      <div class="card span-2">
+        <h2><i data-lucide="sparkles"></i> About Me</h2>
+        <p class="about-text">
+          I am a <b>B.Tech IT Student</b> at Vasavi College of Engineering. 
+          With hands on experience in <b>C Programming</b> and <b>Python Programmming</b> 
+          along with basic understanding in <b>Data Structures</b> and <b>Web Development</b>, I am always 
+          looking to solve real-world problem statements. I enjoy learning new technologies 
+          and working on creative projects.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2><i data-lucide="cpu"></i> Tech Stack</h2>
+        <div class="skills-wrapper">
+          <div class="skill-pill"><i class="fa-brands fa-java" style="color:#f89820"></i><span>Java</span></div>
+          <div class="skill-pill"><i class="fa-brands fa-python" style="color:#4584b6"></i><span>Python</span></div>
+          <div class="skill-pill"><i class="fa-brands fa-html5" style="color:#e34c26"></i><span>HTML</span></div>
+          <div class="skill-pill"><i class="fa-brands fa-css3-alt" style="color:#264de4"></i><span>CSS</span></div>
+          <div class="skill-pill"><i class="fa-brands fa-js" style="color:#f7df1e"></i><span>JS</span></div>
+          <div class="skill-pill"><i class="fa-solid fa-c" style="color:#00599c"></i><span>C</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2><i data-lucide="trophy"></i> Achievements</h2>
+        
+        <div class="achieve-item">
+          <div class="achieve-icon"><i class="fa-solid fa-certificate"></i></div>
+          <div class="achieve-info">
+            <b>NPTEL Certification</b>
+            <span>Joy of Computing using Python</span>
+          </div>
+        </div>
+
+        <div class="achieve-item">
+          <div class="achieve-icon"><i class="fa-solid fa-code"></i></div>
+          <div class="achieve-info">
+            <b>Hackathon Participant</b>
+            <span>Inter-College Coding Event</span>
+          </div>
+        </div>
+
+        <div class="achieve-item">
+          <div class="achieve-icon"><i class="fa-solid fa-users"></i></div>
+          <div class="achieve-info">
+            <b>DSAC Club Member</b>
+            <span>HR / PR Team</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="mini-footer">
+        © 2026 Sai Ganesh | Built with <i class="fa-solid fa-heart" style="color:var(--primary)"></i>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    function toggleTheme() {
+      document.body.classList.toggle("dark");
+      const isDark = document.body.classList.contains("dark");
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    }
+
+    if (!localStorage.getItem("theme") || localStorage.getItem("theme") === "dark") {
+      document.body.classList.add("dark");
+    }
+  </script>
+
+</body>
+</html>
