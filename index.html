@@ -6,20 +6,19 @@
   <title>Sai Ganesh | Portfolio</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
-
+  
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
   <style>
-    /* Theme Variables */
     :root {
       --bg: #f3f6fc;
       --text: #1e293b;
       --text-muted: #64748b;
       --card-bg: rgba(255, 255, 255, 0.85);
       --border: rgba(255, 255, 255, 1);
-      --primary: #0d9488; /* Teal 600 */
-      --secondary: #0f172a; /* Slate 900 */
+      --primary: #0d9488;
+      --secondary: #0f172a;
       --accent-gradient: linear-gradient(135deg, #0d9488, #2dd4bf);
       --shadow: 0 10px 40px -10px rgba(0,0,0,0.1);
     }
@@ -52,11 +51,9 @@
       justify-content: center;
       align-items: center;
       padding: 2rem;
-      overflow: hidden; 
       position: relative;
     }
 
-    /* Background Animation */
     .bg-shape {
       position: fixed;
       filter: blur(80px);
@@ -80,17 +77,15 @@
       100% { transform: translate(30px, 50px); }
     }
 
-    /* Layout */
     .container {
       width: 100%;
       max-width: 1100px;
-      height: 90vh; /* Increased slightly to fit extra details */
       display: grid;
       grid-template-columns: 350px 1fr;
       gap: 1.5rem;
+      align-items: start;
     }
 
-    /* Cards */
     .card {
       background: var(--card-bg);
       backdrop-filter: blur(20px);
@@ -99,19 +94,17 @@
       border-radius: 28px;
       box-shadow: var(--shadow);
       padding: 2rem;
-      overflow-y: auto;
       position: relative;
     }
-    .card::-webkit-scrollbar { width: 4px; }
-    .card::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 4px; }
 
-    /* Left Column: Profile */
     .profile-card {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
       padding: 2rem 1.5rem;
+      position: sticky;
+      top: 2rem;
     }
 
     .theme-toggle {
@@ -162,7 +155,6 @@
       border: 1px solid rgba(45, 212, 191, 0.3);
     }
 
-    /* Education List (Compact for Profile) */
     .education-list {
       margin-top: 1.5rem;
       width: 100%;
@@ -191,9 +183,8 @@
     
     .edu-text strong { display: block; color: var(--text); font-weight: 600; }
     
-    /* Social Buttons */
     .social-links {
-      margin-top: auto;
+      margin-top: 2rem;
       width: 100%;
       display: flex;
       flex-direction: column;
@@ -213,20 +204,11 @@
       font-size: 0.9rem;
     }
 
-    .github-btn {
-      background: var(--secondary);
-      color: var(--bg);
-    }
+    .github-btn { background: var(--secondary); color: var(--bg); }
     .dark .github-btn { background: #fff; color: #000; }
     
-    /* ADDED: LinkedIn Button Styles */
-    .linkedin-btn {
-      background: #0077b5;
-      color: #fff;
-    }
-    .linkedin-btn:hover {
-      background: #006097;
-    }
+    .linkedin-btn { background: #0077b5; color: #fff; }
+    .linkedin-btn:hover { background: #006097; }
     
     .email-link {
       color: var(--text-muted);
@@ -236,11 +218,10 @@
     }
     .email-link:hover { color: var(--primary); text-decoration: underline; }
 
-    /* Right Column Grid */
     .details-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: auto 1fr;
+      grid-auto-rows: min-content;
       gap: 1.5rem;
     }
 
@@ -262,7 +243,27 @@
       font-size: 0.95rem;
     }
 
-    /* Skills */
+    .qual-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+    .qual-card {
+      background: rgba(13, 148, 136, 0.05);
+      padding: 1.2rem;
+      border-radius: 16px;
+      border: 1px solid rgba(13, 148, 136, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .dark .qual-card { background: rgba(45, 212, 191, 0.05); border-color: rgba(45, 212, 191, 0.1); }
+    .qual-title { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem; }
+    .qual-score { font-size: 1.8rem; font-weight: 700; color: var(--primary); line-height: 1; margin-bottom: 0.3rem;}
+    .qual-school { font-size: 0.85rem; color: var(--text); font-weight: 600; }
+
     .skills-wrapper {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -281,7 +282,6 @@
     .skill-pill i { font-size: 1.5rem; color: var(--text); }
     .skill-pill span { font-size: 0.75rem; font-weight: 600; }
 
-    /* Achievements List */
     .achieve-item {
       display: flex;
       gap: 1rem;
@@ -306,19 +306,89 @@
     .achieve-info b { display: block; color: var(--text); font-size: 0.95rem; margin-bottom: 2px;}
     .achieve-info span { color: var(--text-muted); font-size: 0.85rem; }
 
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    .project-card {
+      background: rgba(255, 255, 255, 0.5);
+      border: 1px solid var(--border);
+      padding: 1.2rem;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: transform 0.2s;
+    }
+    .dark .project-card { background: rgba(255, 255, 255, 0.03); }
+    .project-card:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.8); }
+    .dark .project-card:hover { background: rgba(255, 255, 255, 0.08); }
+
+    .project-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+    .project-title { font-weight: 700; font-size: 1rem; color: var(--text); }
+    .project-links a { color: var(--text-muted); font-size: 1rem; }
+    .project-links a:hover { color: var(--primary); }
+    .project-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 0.5rem; }
+    
+    .tech-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: auto; }
+    .tech-tag {
+      font-size: 0.7rem;
+      padding: 3px 10px;
+      background: rgba(13, 148, 136, 0.1);
+      color: var(--primary);
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    .contact-form { display: grid; gap: 1rem; grid-template-columns: 1fr 1fr; }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    .form-group.full-width { grid-column: span 2; }
+    
+    .form-group label { font-size: 0.85rem; font-weight: 600; color: var(--text); }
+    .form-input {
+      padding: 0.8rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.5);
+      color: var(--text);
+      outline: none;
+    }
+    .dark .form-input { background: rgba(0, 0, 0, 0.2); }
+    .form-input:focus { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.2); }
+    
+    .submit-btn {
+      grid-column: span 2;
+      padding: 0.8rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .submit-btn:hover { opacity: 0.9; transform: scale(0.99); }
+
     .mini-footer {
       grid-column: span 2;
       text-align: center;
       font-size: 0.8rem;
       color: var(--text-muted);
-      margin-top: 0.5rem;
+      margin-top: 1rem;
     }
 
-    /* Mobile */
     @media (max-width: 900px) {
       body { overflow-y: auto; height: auto; display: block; padding: 1rem; }
-      .container { display: flex; flex-direction: column; height: auto; }
+      .container { display: flex; flex-direction: column; height: auto; gap: 2rem; }
       .bg-shape { display: none; }
+      .profile-card { position: relative; top: 0; }
+      .contact-form { grid-template-columns: 1fr; }
+      .form-group.full-width { grid-column: span 1; }
+      .submit-btn { grid-column: span 1; }
     }
   </style>
 </head>
@@ -394,6 +464,31 @@
         </p>
       </div>
 
+      <div class="card span-2">
+        <h2><i data-lucide="graduation-cap"></i> Academic Qualifications</h2>
+        <div class="qual-grid">
+          
+          <div class="qual-card">
+            <div class="qual-title">B.Tech (IT)</div>
+            <div class="qual-score">7.4 CGPA</div>
+            <div class="qual-school">Vasavi College</div>
+          </div>
+
+          <div class="qual-card">
+            <div class="qual-title">Intermediate</div>
+            <div class="qual-score">97.2%</div>
+            <div class="qual-school">Narayana Junior</div>
+          </div>
+
+          <div class="qual-card">
+            <div class="qual-title">Schooling</div>
+            <div class="qual-score">9.7 CGPA</div>
+            <div class="qual-school">MGM International</div>
+          </div>
+
+        </div>
+      </div>
+
       <div class="card">
         <h2><i data-lucide="cpu"></i> Tech Stack</h2>
         <div class="skills-wrapper">
@@ -435,26 +530,131 @@
 
       </div>
 
+      <div class="card span-2">
+        <h2><i data-lucide="folder-git-2"></i> Featured Projects</h2>
+        
+        <div class="project-grid">
+          
+          <div class="project-card">
+            <div class="project-header">
+              <div class="project-title">Personal Portfolio</div>
+              <div class="project-links">
+                <a href="#"><i class="fa-brands fa-github"></i></a>
+              </div>
+            </div>
+            <p class="project-desc">
+              A responsive personal portfolio website designed with glassmorphism UI using HTML, CSS, and JavaScript.
+            </p>
+            <div class="tech-tags">
+              <span class="tech-tag">HTML5</span>
+              <span class="tech-tag">CSS3</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-header">
+              <div class="project-title">FarmApp</div>
+              <div class="project-links">
+                <a href="#"><i class="fa-brands fa-github"></i></a>
+              </div>
+            </div>
+            <p class="project-desc">
+              A Object Oriented Programming based User Interface, where the consumer and farmer are directly in contact. 
+            </p>
+            <div class="tech-tags">
+              <span class="tech-tag">Java(OOP)</span>
+              <span class="tech-tag">JavaFx</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-header">
+              <div class="project-title">Flora</div>
+              <div class="project-links">
+                <a href="#"><i class="fa-brands fa-github"></i></a>
+              </div>
+            </div>
+            <p class="project-desc">
+                A realtime Leaf disease detection user interface, where the disease of the leaf is been identified using a photograph of the leaf or the plant. 
+            </p>
+            <div class="tech-tags">
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">Python(ML)</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-header">
+              <div class="project-title">C Compiler</div>
+              <div class="project-links">
+                <a href="#"><i class="fa-brands fa-github"></i></a>
+              </div>
+            </div>
+            <p class="project-desc">
+              A mini backend C compiler which gives the output of basic C programming and also stores the step by step process taken place while compiling and running the program into another file.
+            </p>
+            <div class="tech-tags">
+              <span class="tech-tag">Hash Tables</span>
+              <span class="tech-tag">Parse Trees</span>
+               <span class="tech-tag">C</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card span-2">
+        <h2><i data-lucide="send"></i> Get In Touch</h2>
+        <form action="mailto:saiganeshkokkula25@gmail.com" method="post" enctype="text/plain" class="contact-form">
+            <div class="form-group">
+                <label>Your Name</label>
+                <input type="text" name="name" class="form-input" placeholder="John Doe" required>
+            </div>
+            <div class="form-group">
+                <label>Your Email</label>
+                <input type="email" name="email" class="form-input" placeholder="john@example.com" required>
+            </div>
+            <div class="form-group full-width">
+                <label>Message</label>
+                <textarea name="message" rows="4" class="form-input" placeholder="Hey Sai, I'd like to discuss a project..." required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">
+                <i class="fa-solid fa-paper-plane"></i> Send Message
+            </button>
+        </form>
+      </div>
+
       <div class="mini-footer">
         © 2026 Sai Ganesh
       </div>
 
     </div>
   </div>
-<!-- 
+ 
   <script>
     lucide.createIcons();
 
     function toggleTheme() {
       document.body.classList.toggle("dark");
       const isDark = document.body.classList.contains("dark");
+      
+      const icon = document.querySelector('.theme-toggle i');
+      if(isDark) {
+        icon.setAttribute('data-lucide', 'sun');
+      } else {
+        icon.setAttribute('data-lucide', 'moon');
+      }
+      lucide.createIcons();
+
       localStorage.setItem("theme", isDark ? "dark" : "light");
     }
 
     if (!localStorage.getItem("theme") || localStorage.getItem("theme") === "dark") {
       document.body.classList.add("dark");
+      document.querySelector('.theme-toggle i').setAttribute('data-lucide', 'sun');
+      lucide.createIcons();
     }
-  </script> -->
+  </script>
 
 </body>
 </html>
